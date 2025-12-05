@@ -1,0 +1,30 @@
+# Default configuration for zsh-prompt-engine
+
+[prompt]
+separator = " | "
+enable_animation = true
+frame_interval = 1
+
+[modules]
+order = ["art", "project", "git", "system"]
+
+[git]
+show_branch = true
+show_status = true
+
+[system]
+show_time = true
+show_load = true
+
+[colors]
+primary = "cyan"
+muted = "white"
+accent = "magenta"
+
+[art]
+frames = [
+  "<o",
+  "o>",
+  "^o",
+  "o^"
+]
