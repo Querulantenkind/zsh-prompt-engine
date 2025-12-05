@@ -154,11 +154,11 @@ def build_shell_payload(config: Dict[str, Any]) -> str:
     return "".join(payload)
 
 
-def cache_dir_from_env() -> pathlib.Path:
+def cache_dir_from_env() -> Optional[pathlib.Path]:
     env_value = os.environ.get("ZPE_CACHE_DIR")
-    if env_value:
-        return pathlib.Path(env_value).expanduser().resolve()
-    return pathlib.Path.home() / ".cache" / "zpe"
+    if not env_value:
+        return None
+    return pathlib.Path(env_value).expanduser().resolve()
 
 
 def cache_file_for(config_path: pathlib.Path, cache_dir: pathlib.Path) -> pathlib.Path:
