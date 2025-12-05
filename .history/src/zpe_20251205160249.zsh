@@ -18,19 +18,16 @@ setopt prompt_subst
 
 # State containers
 typeset -ga ZPE_MODULE_ORDER=(art project git system kubectl venv battery)
-typeset -ga ZPE_MODULES_DISABLED=()
 typeset -ga ZPE_ART_FRAMES
 ZPE_ART_FRAMES=("(>" "=>" ">=" )
 typeset -gA ZPE_GIT_CONF
 ZPE_GIT_CONF=(
-  [enabled]="true"
   [show_branch]="true"
   [show_status]="true"
   [max_branch_len]="0"
 )
 typeset -gA ZPE_SYSTEM_CONF
 ZPE_SYSTEM_CONF=(
-  [enabled]="true"
   [show_time]="true"
   [show_load]="true"
 )
@@ -42,22 +39,18 @@ ZPE_COLOR_CONF=(
 )
 typeset -gA ZPE_KUBE_CONF
 ZPE_KUBE_CONF=(
-  [enabled]="true"
   [show_namespace]="true"
 )
 typeset -gA ZPE_VENV_CONF
 ZPE_VENV_CONF=(
-  [enabled]="true"
   [show_prefix]="true"
 )
 typeset -gA ZPE_PROJECT_CONF
 ZPE_PROJECT_CONF=(
-  [enabled]="true"
   [max_path_len]="0"
 )
 typeset -gA ZPE_BATTERY_CONF
 ZPE_BATTERY_CONF=(
-  [enabled]="true"
   [show_status]="true"
   [warn_threshold]="20"
   [critical_threshold]="10"
@@ -130,15 +123,6 @@ function zpe_render_prompt() {
   local segments=()
   local module
   for module in "${ZPE_MODULE_ORDER[@]}"; do
-    # Skip if in disabled list
-    if (( ${ZPE_MODULES_DISABLED[(I)$module]} )); then
-      continue
-    fi
-    # Check per-module enabled flag
-    local conf_var="ZPE_${(U)module}_CONF"
-    if [[ ${(P)${:-${conf_var}[enabled]}} == false ]]; then
-      continue
-    fi
     local handler=${ZPE_MODULE_HANDLERS[$module]}
     if [[ -n $handler ]] && whence -w "$handler" >/dev/null 2>&1; then
       local segment

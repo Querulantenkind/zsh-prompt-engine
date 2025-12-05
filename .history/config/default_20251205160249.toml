@@ -7,16 +7,13 @@ frame_interval = 1
 
 [modules]
 order = ["art", "project", "git", "system", "kubectl", "venv", "battery"]
-disabled = []  # e.g. ["battery", "kubectl"] to quickly disable modules
 
 [git]
-enabled = true
 show_branch = true
 show_status = true
 max_branch_len = 0  # 0 = no truncation
 
 [system]
-enabled = true
 show_time = true
 show_load = true
 
@@ -26,7 +23,6 @@ muted = "white"
 accent = "magenta"
 
 [art]
-enabled = true
 frames = [
   "<o",
   "o>",
@@ -35,19 +31,15 @@ frames = [
 ]
 
 [kubectl]
-enabled = true
 show_namespace = true
 
 [venv]
-enabled = true
 show_prefix = true
 
 [project]
-enabled = true
 max_path_len = 0  # 0 = no truncation
 
 [battery]
-enabled = true
 show_status = true
 warn_threshold = 20
 critical_threshold = 10

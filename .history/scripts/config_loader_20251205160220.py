@@ -35,16 +35,13 @@ DEFAULTS: Dict[str, Any] = {
     },
     "modules": {
         "order": ["art", "project", "git", "system", "kubectl", "venv", "battery"],
-        "disabled": [],
     },
     "git": {
-        "enabled": True,
         "show_branch": True,
         "show_status": True,
         "max_branch_len": 0,
     },
     "system": {
-        "enabled": True,
         "show_time": True,
         "show_load": True,
     },
@@ -54,23 +51,18 @@ DEFAULTS: Dict[str, Any] = {
         "accent": "magenta",
     },
     "art": {
-        "enabled": True,
         "frames": ["(>", "=>", ">="]
     },
     "kubectl": {
-        "enabled": True,
         "show_namespace": True,
     },
     "venv": {
-        "enabled": True,
         "show_prefix": True,
     },
     "project": {
-        "enabled": True,
         "max_path_len": 0,
     },
     "battery": {
-        "enabled": True,
         "show_status": True,
         "warn_threshold": 20,
         "critical_threshold": 10,
@@ -157,7 +149,6 @@ def build_shell_payload(config: Dict[str, Any]) -> str:
     payload.append(f'ZPE_FRAME_INTERVAL={int(prompt_cfg.get("frame_interval", 1))}\n')
 
     payload.append(emit_array("ZPE_MODULE_ORDER", modules_cfg.get("order", [])))
-    payload.append(emit_array("ZPE_MODULES_DISABLED", modules_cfg.get("disabled", [])))
     payload.append(emit_array("ZPE_ART_FRAMES", art_cfg.get("frames", [])))
 
     payload.append(emit_assoc("ZPE_GIT_CONF", git_cfg))
@@ -165,7 +156,6 @@ def build_shell_payload(config: Dict[str, Any]) -> str:
     payload.append(emit_assoc("ZPE_COLOR_CONF", color_cfg))
     payload.append(emit_assoc("ZPE_KUBE_CONF", kube_cfg))
     payload.append(emit_assoc("ZPE_VENV_CONF", venv_cfg))
-    payload.append(emit_assoc("ZPE_PROJECT_CONF", project_cfg))
     payload.append(emit_assoc("ZPE_BATTERY_CONF", battery_cfg))
 
     return "".join(payload)
