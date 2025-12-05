@@ -1,2 +1,1 @@
-# zsh-prompt-engine
-Dynamic ZSH prompt framework with ASCII art, animations, and contextual modules for git, system metrics, and more.
+ A flexible framework for building dynamic ZSH prompts with ASCII art, animations, and contextual information. Features modular architecture for git status, system metrics, project context, and custom integrations. Highly configurable through YAML/TOML files.
