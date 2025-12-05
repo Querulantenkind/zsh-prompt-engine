@@ -127,8 +127,8 @@ class ModuleTests(unittest.TestCase):
         self.assertIn("git:main", out)
         self.assertIn("+1", out)
         self.assertIn("~2", out)
-        # Separator variable should be in the rendered PROMPT (joined segments)
-        self.assertIn("ZPE_SEPARATOR", out)
+        # Separator should appear between segments
+        self.assertIn(" | ", out)
 
 
 if __name__ == "__main__":

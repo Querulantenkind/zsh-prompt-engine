@@ -21,9 +21,8 @@ def run_zsh(script: str, extra_env: dict | None = None) -> str:
         capture_output=True,
         text=True,
         env=env,
+        check=True,
     )
-    if result.returncode != 0:
-        raise RuntimeError(f"zsh failed: {result.stderr}")
     return result.stdout.strip()
 
 
@@ -127,8 +126,8 @@ class ModuleTests(unittest.TestCase):
         self.assertIn("git:main", out)
         self.assertIn("+1", out)
         self.assertIn("~2", out)
-        # Separator variable should be in the rendered PROMPT (joined segments)
-        self.assertIn("ZPE_SEPARATOR", out)
+        # Separator should appear between segments
+        self.assertIn(" | ", out)
 
 
 if __name__ == "__main__":
